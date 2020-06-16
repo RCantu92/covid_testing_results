@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,12 @@
   },
   "homepage": "https://github.com/RCantu92/covid_testing_results#readme",
   "dependencies": {
-    "solc": "^0.4.25"
+    "assert": "^2.0.0",
+    "solc": "^0.4.25",
+    "web3": "^1.2.9"
+  },
+  "devDependencies": {
+    "ganache-cli": "^6.9.1",
+    "mocha": "^8.0.1"
   }
 }
