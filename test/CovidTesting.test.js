@@ -34,11 +34,15 @@ beforeEach(async () => {
     covidTesting = await new web3.eth.Contract(JSON.parse(compiledCovidTesting.interface))
         .deploy({ data: compiledCovidTesting.bytecode })
         .send({ from: accounts[0], gas: '1000000' });
+
+    await covidTesting.methods.addHealthcareProfessional(accounts[1], 123456).send({ 
+        from: accounts[0]
+    });
 });
 
 describe('COVID Testing', () => {
     // Confirms that the contract can be deployed.
-    it('Deploys a factory and a campaign', () => {
+    it('Deploys a factory and a campaign.', () => {
         assert.ok(covidTesting.options.address);
     });
 
@@ -50,17 +54,14 @@ describe('COVID Testing', () => {
 
     // Confirms you can add healthcare professionals that
     // can administer tests.
-    it('Allows for the addition of qualified healthcare professionals', async () => {
-        await covidTesting.methods.addHealthcareProfessional(accounts[1], 123456).send({ 
-            from: accounts[0]
-        });
+    it('Allows for the addition of qualified healthcare professionals.', async () => {
         const isHealthcareProfQualified = await covidTesting.methods.isHealthcareProfQualified(123456).call();
         assert(isHealthcareProfQualified);
     });
 
     // Confirms you can add civillians that
     // have had the test administered.
-    it('Allows for the addition of a tested civillian', async () => {
+    it('Allows for the addition of a tested civillian.', async () => {
         await covidTesting.methods.addTestedCivillian(33448863, 123456, accounts[2]).send({
             from: accounts[1]
         });

@@ -4,7 +4,7 @@ contract CovidTesting {
 
     // Create a variable to store the
     // address of the contract owner.
-    address contractOwner;
+    address public contractOwner;
 
     // Set the msg.sender of the contract
     // as the address that owns the contract.
@@ -20,7 +20,7 @@ contract CovidTesting {
         bool covidQualified;
     }
 
-    // Struct that storess a civillian;s ethereum
+    // Struct that storess a civillian's ethereum
     // address, whether they've been tested for
     // COVID, what time the test was done, and
     // who administered the test.
