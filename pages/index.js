@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import { Card, Form, Button } from 'semantic-ui-react';
+import { Card, Form, Button, Input, Message } from 'semantic-ui-react';
 import covidTesting from '../back-end/covidTesting.js';
+import web3 from '../back-end/web3.js';
 
 class CovidTesting extends Component {
+    state = {
+        govntId: "",
+        errorMessage: "",
+        loading: false
+    };
+
     static async getInitialProps() {
         const contractOwner = await covidTesting.methods.contractOwner().call();
         
@@ -20,24 +27,44 @@ class CovidTesting extends Component {
         return <Card.Group items={items} />;
     }
 
+    onSubmitCivillian = async (event) => {
+        // Browser from trying to
+        // submit the form
+        event.preventDefault();
+
+        this.setState({ loading: true, errorMessage: "" });
+
+        try {
+            const accounts = await web3.eth.getAccounts();
+            console.log(await covidTesting.methods.isCivillianTested(this.state.govntId).send({ from: accounts[0] }));
+        } catch (err) {
+            this.setState({ errorMessage: err.message });
+        }
+
+        this.setState({ loading: false });
+
+
+    };
+
     render() {
         return(
             <div>
                 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
                 {this.renderContractOwner()}
 
-                <Form>
+                <Form onSubmit={this.onSubmitCivillian} error={!!this.state.errorMessage}>
                     <Form.Field>
-                        <label>Confirm if civllian has been tested for COVID-19</label>
-                        <input placeholder="Search by Government Issued ID"/>
+                        <h3>Confirm if civllian has been tested for COVID-19</h3>
+
+                        <Input
+                        placeholder="Search by Government Issued ID"
+                        onChange={event => this.setState({ govntId: event.target.value })}
+                        />
                     </Form.Field>
 
-                    <Form.Field>
-                        <label>Confirm if healthcare professional is qualified to administer COVID-19 tests</label>
-                        <input placeholder="Search by Healthcare Professional License Number"/>
-                    </Form.Field>
+                    <Message error header="Error:" content={this.state.errorMessage} />
 
-                    <Button>Search</Button>
+                    <Button loading={this.state.loading}>Search</Button>
                 </Form>
             </div>
         )
