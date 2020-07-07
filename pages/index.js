@@ -7,6 +7,8 @@ class CovidTesting extends Component {
     state = {
         govntId: '',
         isCivillianTested: '',
+        licenseNum: '',
+        isHealthcareProfQualified: '',
         errorMessage: '',
         loading: false
     };
@@ -46,10 +48,25 @@ class CovidTesting extends Component {
             this.setState({ errorMessage: err.message });
         }
 
+        this.setState({ loading: false });
+    };
+
+    onSubmitHealthcareProf = async (event) => {
+        // Browser from trying to
+        // submit the form
+        event.preventDefault();
+
+        this.setState({ loading: true, errorMessage: '' });
+
+        try {
+            const accounts = await web3.eth.getAccounts();
+            let isHealthcareProfQualified = await covidTesting.methods.isHealthcareProfQualified(this.state.licenseNum).call();
+            this.setState({ isHealthcareProfQualified: isHealthcareProfQualified });
+        } catch(err) {
+            this.setState({ errorMessage: err.message });
+        }
 
         this.setState({ loading: false });
-
-
     };
 
     render() {
@@ -75,8 +92,21 @@ class CovidTesting extends Component {
                     <Message header='Searched Civillian COVID Tested: ' content={this.state.isCivillianTested.toString()} />
                 </Form>
 
-                <Form>
+                <Form onSubmit={this.onSubmitHealthcareProf} error={!!this.state.errorMessage} >
+                    <Form.Field>
+                        <label>Confirm if healthcare professional is qualified for COVID-19 test</label>
 
+                        <Input
+                        placeholder='Search healthcare professional by license number'
+                        onChange={event => this.setState({ licenseNum: event.target.value })}
+                        />
+                    </Form.Field>
+
+                    <Message error header='Error:' content={this.state.errorMessage} />
+
+                    <Button type='submit' loading={this.state.loading}>Search</Button>
+
+                    <Message header='Searched Healthcare Professional Qualification: ' content={this.state.isHealthcareProfQualified.toString()} />
                 </Form>
             </div>
         )
@@ -84,8 +114,6 @@ class CovidTesting extends Component {
 };
 
 export default CovidTesting;
-
-// in <Button>: onClick={this.onClick}
 
 /*
 Form Outline:
