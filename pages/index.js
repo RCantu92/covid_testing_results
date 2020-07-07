@@ -5,8 +5,9 @@ import web3 from '../back-end/web3.js';
 
 class CovidTesting extends Component {
     state = {
-        govntId: "",
-        errorMessage: "",
+        govntId: '',
+        isCivillianTested: '',
+        errorMessage: '',
         loading: false
     };
 
@@ -15,7 +16,9 @@ class CovidTesting extends Component {
         
         return { contractOwner };
     }
-
+    
+    // Displays the Ethereum address that
+    // owns the overall contract.
     renderContractOwner() {
         const items = [{
             header: 'Contract Owner Address:',
@@ -32,14 +35,17 @@ class CovidTesting extends Component {
         // submit the form
         event.preventDefault();
 
-        this.setState({ loading: true, errorMessage: "" });
+        this.setState({ loading: true, errorMessage: '' });
 
         try {
             const accounts = await web3.eth.getAccounts();
-            console.log(await covidTesting.methods.isCivillianTested(this.state.govntId).send({ from: accounts[0] }));
-        } catch (err) {
+            let isCivillianTested = await covidTesting.methods.isCivillianTested(this.state.govntId).call();
+            this.setState({ isCivillianTested: isCivillianTested[0] });
+            // console.log(this.state.isCivillianTested.toString());
+        } catch(err) {
             this.setState({ errorMessage: err.message });
         }
+
 
         this.setState({ loading: false });
 
@@ -49,22 +55,28 @@ class CovidTesting extends Component {
     render() {
         return(
             <div>
-                <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+                <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css' />
                 {this.renderContractOwner()}
 
-                <Form onSubmit={this.onSubmitCivillian} error={!!this.state.errorMessage}>
+                <Form onSubmit={this.onSubmitCivillian} error={!!this.state.errorMessage} >
                     <Form.Field>
-                        <h3>Confirm if civllian has been tested for COVID-19</h3>
+                        <label>Confirm if civllian has been tested for COVID-19</label>
 
                         <Input
-                        placeholder="Search by Government Issued ID"
+                        placeholder='Search civillian by government Issued ID number'
                         onChange={event => this.setState({ govntId: event.target.value })}
                         />
                     </Form.Field>
 
-                    <Message error header="Error:" content={this.state.errorMessage} />
+                    <Message error header='Error:' content={this.state.errorMessage} />
 
-                    <Button loading={this.state.loading}>Search</Button>
+                    <Button type='submit' loading={this.state.loading}>Search</Button>
+
+                    <Message header='Searched Civillian COVID Tested: ' content={this.state.isCivillianTested.toString()} />
+                </Form>
+
+                <Form>
+
                 </Form>
             </div>
         )
@@ -72,3 +84,19 @@ class CovidTesting extends Component {
 };
 
 export default CovidTesting;
+
+// in <Button>: onClick={this.onClick}
+
+/*
+Form Outline:
+
+Show owner of contract.
+
+Have option to check if a civillian has been tested for COVID.
+    
+    Enter civillian government ID number to check whether they have been tested.
+
+Go to page to add a civillian after they've been tested.
+
+Go to page to add a healthcare professional who is qualified to adminsiter COVID tests.
+*/
