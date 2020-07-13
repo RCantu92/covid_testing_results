@@ -1,12 +1,12 @@
 # COVID Testing Results
 
-This project aims to essentially have a database of healthcare professionals qualified to administer COVID-19 tests as well as civilians who have been tested.
+This project is, in essence, a database of healthcare professionals qualified to administer COVID-19 tests as well as civilians who have been tested.
 
-Under the hood, how it functions is that the contract creator address is the only one who could submit healthcare professionals as being qualified to administer COVID tests. In practice, the creator address would submit the professionals ethereum address and professional license number. This info could also publicly be viewed by anyone wanting to verify someone is qualified to administer the tests.
+Under the hood, how it functions is that the contract creator address is the only one who can submit healthcare professionals as being qualified to administer COVID tests. In the real world, how it might work is the contract creator address belongs to an organization that works in conjunction with the healthcare industry. Then, the healthcare professionals would apply to be eligible to administer the tests. This would prevent unwanted malicious actors from randomly adding civilians as having been tested. As for this particular proof of concept, the creator address would simply submit the professionals ethereum address and professional license number to be added as a qualified professional to administer COVID-19 tests. Then, a civilian could quickly verify if a certain healthcare professional is qualified to administer the tests. This is demonstrated in the gif below.
 
 ![](./images/covid_demo_01.gif)
 
-Once a healthcare professional has been added as someone that can administer tests, they’re the only one that can add civilians as having been tested. What is provided is the civilian’s ethereum address and government issued ID number (e.g. driver’s license number) and the qualified healthcare professionals license number. This info also can be publicly called by someone wanting to verify someone as having been tested by a professional qualified to administer the tests.
+Once healthcare professionals have been added as administers of tests, they are the only ones that can add civilians as having been tested. What is provided to add civilians is the civilian’s ethereum address, government issued ID number (e.g. driver’s license number) and the qualified healthcare professional’s license number. Similar to verifying if a healthcare professional is qualified, civilians can also be searched to verify them as having been tested by a qualified professional. This is demonstrated in the gif below.
 
 ![](./images/covid_demo_02.gif)
 
