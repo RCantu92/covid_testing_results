@@ -4,7 +4,11 @@ This project aims to essentially have a database of healthcare professionals qua
 
 Under the hood, how it functions is that the contract creator address is the only one who could submit healthcare professionals as being qualified to administer COVID tests. In practice, the creator address would submit the professionals ethereum address and professional license number. This info could also publicly be viewed by anyone wanting to verify someone is qualified to administer the tests.
 
+![](./images/covid_demo_01.gif)
+
 Once a healthcare professional has been added as someone that can administer tests, they’re the only one that can add civilians as having been tested. What is provided is the civilian’s ethereum address and government issued ID number (e.g. driver’s license number) and the qualified healthcare professionals license number. This info also can be publicly called by someone wanting to verify someone as having been tested by a professional qualified to administer the tests.
+
+![](./images/covid_demo_02.gif)
 
 One thing to note, neither professional license number nor civilian’s government issue id number are tied to an individual’s name. Also, as to why this was built on the blockchain is because it provides assurance that the info has not been tampered with.
 

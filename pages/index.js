@@ -112,12 +112,12 @@ class CovidTesting extends Component {
     renderForms() {
         const items = [
             {
-                header: <h3>Confirm if civllian has been tested for COVID-19</h3>,
+                header: <h3>Confirm if civilian has been tested for COVID-19</h3>,
                 description: (
                     <Form onSubmit={this.onSubmitCivillian} error={!!this.state.errorMessage} >
                         <Form.Field>
                             <Input
-                            placeholder='Search civillian by government Issued ID number'
+                            placeholder='Search civilian by government Issued ID number'
                             onChange={event => this.setState({ govntId: event.target.value })}
                             />
                         </Form.Field>
@@ -126,7 +126,7 @@ class CovidTesting extends Component {
 
                         <Button type='submit' loading={this.state.loadingOne}>Search</Button>
 
-                        <Message header='Searched Civillian COVID Tested: ' content={this.state.isCivillianTested.toString()} />
+                        <Message header='Searched Civilian COVID Tested: ' content={this.state.isCivillianTested.toString()} />
                     </Form>
                 )
             },
@@ -172,12 +172,12 @@ class CovidTesting extends Component {
                 )
             },
             {
-                header: <h3>Add a civillian that has had the COVID-19 test</h3>,
+                header: <h3>Add a civilian that has had the COVID-19 test</h3>,
                 description: (
                     <Form onSubmit={this.onSubmitaddTestedCivillian} error={!!this.state.errorMessage} >
                         <Form.Field>
                             <Input
-                            placeholder='Add civillian by government Issued ID number'
+                            placeholder='Add civilian by government Issued ID number'
                             onChange={event => this.setState({ govntId: event.target.value })}
                             />
 
@@ -187,7 +187,7 @@ class CovidTesting extends Component {
                             />
 
                             <Input
-                            placeholder='Add civillian Ethereum address'
+                            placeholder='Add civilian Ethereum address'
                             onChange={event => this.setState({ civillianEthAddress: event.target.value })}
                             />
                         </Form.Field>
