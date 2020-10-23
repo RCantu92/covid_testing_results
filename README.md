@@ -49,14 +49,12 @@ If all the tests are passed, you should an output similar to the following:
 To deploy the smart contract onto the Ropsten Ethereum testnet, you would navigate back to the back-end directory and run the following in the command line:
 
 ```
-node deploy.js
+node back-end/deploy.js
 ```
 
 Once deployed, you should see message like the following:
 
 ![](./images/node_deploy_output.png)
-
-*(Note: This is a different deployed address than the listed at the end of this README.)
 
 To now render a local instance of contract on your browser, navigate to the root directory.
 
@@ -68,7 +66,7 @@ npm run dev
 
 After running the above command, on your web browser navigate to [localhost:3000](http://localhost:3000/). The GIF previously shown demonstrates the process of navigating the decentralized crowd funding app.
 
-Lastly, this contract is deployed on the ropsten testnet under address [0xEE40B0b67c36FfEeFc5fc97eBB6Ca6904D3BB2e7](https://ropsten.etherscan.io/address/0xee40b0b67c36ffeefc5fc97ebb6ca6904d3bb2e7).
+Lastly, this contract is deployed on the ropsten testnet under address [0x84F43523b57AdbbE495c35B07B525e0077C32A61](https://ropsten.etherscan.io/address/0x84F43523b57AdbbE495c35B07B525e0077C32A61).
 
 ## Built With
 
@@ -76,6 +74,7 @@ Lastly, this contract is deployed on the ropsten testnet under address [0xEE40B0
 * [Solidity, v.0.4.25](https://solidity.readthedocs.io/en/v0.4.25/) - Smart Contract programming language used.
 * [JavaScript](https://developer.mozilla.org/en-US/docs/Web/javascript) - Programming language used.
 * [solc, v.0.4.25](https://github.com/ethereum/solc-js) - Module for compiling the Solidity programming language.
+* [dotenv](https://www.npmjs.com/package/dotenv) - Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env.
 * [Mocha](https://mochajs.org/) - JavaScript test framework.
 * [Ganache CLI](https://www.npmjs.com/package/ganache-cli) - The command line version of Ganache, your personal blockchain for Ethereum development.
 * [web3](https://github.com/ethereum/web3.js/) - This is the Ethereum JavaScript API which connects to the Generic JSON-RPC spec. Used v.1.2.9

@@ -1,3 +1,5 @@
+// Import environmental variables from .env file
+require('dotenv').config()
 // Load in the hdwallet module
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 // Load in the web3 module
@@ -5,6 +7,10 @@ const Web3 = require('web3');
 // Load in compiled COVID Testing
 // contract from JSON file.
 const compiledCovidTesting = require('./build/CovidTesting.json');
+
+// instantiate new variable of mnemonic phrase to bring in mnemonic
+// phrase
+const mnemoic = process.env.MNEMONIC;
 
 /**
  * @dev Declaring a new variable instance of HDWalletProvider.
@@ -14,8 +20,8 @@ const compiledCovidTesting = require('./build/CovidTesting.json');
  * Specifies which outside node we are going to connect to. (Ethereum-Ropsten)
  */
 const provider = new HDWalletProvider(
-    'river tag balcony picture boil kind drop pig polar save poem time',
-    'https://ropsten.infura.io/v3/491ffd9a994941089a5e348aba1bb061'
+    mnemoic,
+    'https://rinkeby.infura.io/v3/38c9a150380f4b63be2adf7c4c5501bf'
 );
 
 /**
